@@ -21,7 +21,7 @@ class worldtracker {
 			sleep($this->delay);
 			$this->tracker();
 		} else {
-			print date('H:i:s') . " | Placeholder array is empty or count didn't match. Checking spike on next call.\n";
+			print date('H:i:s') . " | Placeholder array is empty. Checking spike on next call.\n";
 			$this->placeholder = $filtered;
 			sleep($this->delay);
 			$this->tracker();
