@@ -13,19 +13,27 @@ class worldtracker {
 		preg_match_all('/"(.+?)",(\d+),"/', implode("\n", $source), $source);
 		$filtered = array_combine($source[1], $source[2]);
 		if (!empty($this->placeholder)) {
-			foreach ($filtered as $key => $world) {
-				if ($filtered[$key] > ($this->placeholder[$key] + $this->spike)) {
-					print date('H:i:s') . " | " . $key . " went up by " . ($filtered[$key] - $this->placeholder[$key]) . " players.\n";
+			if (count($this->placeholder) === count($filtered)) {
+				foreach ($filtered as $key => $world) {
+					if ($filtered[$key] > ($this->placeholder[$key] + $this->spike)) {
+						print date('H:i:s') . " | " . $key . " went up by " . ($filtered[$key] - $this->placeholder[$key]) . " players.\n";
+					}
 				}
+				sleep($this->delay);
+				$this->tracker();
+			} else {
+				print date('H:i:s') . " | The count has changed in either of the arrays. Checking spike on next call.\n";
+				$this->rerun($filtered);
 			}
-			sleep($this->delay);
-			$this->tracker();
 		} else {
-			print date('H:i:s') . " | Placeholder array is empty or count didn't match. Checking spike on next call.\n";
-			$this->placeholder = $filtered;
-			sleep($this->delay);
-			$this->tracker();
+			print date('H:i:s') . " | Placeholder array is empty. Checking spike on next call.\n";
+			$this->rerun($filtered);
 		}
+	}
+	function rerun($filtered) {
+		$this->placeholder = $filtered;
+		sleep($this->delay);
+		$this->tracker();
 	}
 }
 ?>
