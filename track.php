@@ -1,6 +1,6 @@
 <?php
 //Usage: (new worldtracker(delay, spike))->tracker();
-(new worldtracker(30, 20))->tracker();
+(new worldtracker(20, 5))->tracker();
 
 class worldtracker {
 	public function __construct($delay, $spike) {
@@ -19,21 +19,14 @@ class worldtracker {
 						print date('H:i:s') . " | " . $key . " went up by " . ($filtered[$key] - $this->placeholder[$key]) . " players.\n";
 					}
 				}
-				sleep($this->delay);
-				$this->tracker();
+				$this->rerun($filtered);
 			} else {
 				print date('H:i:s') . " | The count has changed in either of the arrays. Checking spike on next call.\n";
 				$this->rerun($filtered);
 			}
 		} else {
 			print date('H:i:s') . " | Placeholder array is empty. Checking spike on next call.\n";
-<<<<<<< HEAD
 			$this->rerun($filtered);
-=======
-			$this->placeholder = $filtered;
-			sleep($this->delay);
-			$this->tracker();
->>>>>>> a27d35258a2c0293cc7eb68bc9a823f8be692538
 		}
 	}
 	function rerun($filtered) {
