@@ -27,13 +27,7 @@ class worldtracker {
 			}
 		} else {
 			print date('H:i:s') . " | Placeholder array is empty. Checking spike on next call.\n";
-<<<<<<< HEAD
 			$this->rerun($filtered);
-=======
-			$this->placeholder = $filtered;
-			sleep($this->delay);
-			$this->tracker();
->>>>>>> a27d35258a2c0293cc7eb68bc9a823f8be692538
 		}
 	}
 	function rerun($filtered) {
