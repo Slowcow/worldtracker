@@ -15,13 +15,13 @@ class worldtracker {
 		if (!empty($this->placeholder)) {
 			foreach ($filtered as $key => $world) {
 				if ($filtered[$key] > ($this->placeholder[$key] + $this->spike)) {
-					print $key . " went up by " . ($filtered[$key] - $this->placeholder[$key]) . " players.\n";
+					print date('H:i:s') . " | " . $key . " went up by " . ($filtered[$key] - $this->placeholder[$key]) . " players.\n";
 				}
 			}
 			sleep($this->delay);
 			$this->tracker();
 		} else {
-			print "Placeholder array is empty or count didn't match. Checking spike on next call.\n";
+			print date('H:i:s') . " | Placeholder array is empty or count didn't match. Checking spike on next call.\n";
 			$this->placeholder = $filtered;
 			sleep($this->delay);
 			$this->tracker();
