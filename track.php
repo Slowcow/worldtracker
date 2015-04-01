@@ -29,7 +29,7 @@ class worldtracker {
 			$this->rerun($filtered);
 		}
 	}
-	function rerun($filtered) {
+	public function rerun($filtered) {
 		$this->placeholder = $filtered;
 		sleep($this->delay);
 		$this->tracker();
